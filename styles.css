@@ -1,0 +1,152 @@
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+/* Main container */
+#drum-machine {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    max-width: 500px;
+    width: 100%;
+}
+
+/* Display */
+#display {
+    background: rgba(0, 0, 0, 0.7);
+    color: #00ff41;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    font-family: 'Courier New', monospace;
+    margin-bottom: 30px;
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #00ff41;
+    box-shadow: 0 0 20px rgba(0, 255, 65, 0.3);
+    text-shadow: 0 0 10px rgba(0, 255, 65, 0.8);
+}
+
+/* Drum pads container */
+.drum-pads-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    max-width: 360px;
+    margin: 0 auto;
+}
+
+/* Drum pad styling */
+.drum-pad {
+    background: linear-gradient(145deg, #f0f0f0, #d0d0d0);
+    border: none;
+    border-radius: 15px;
+    width: 100px;
+    height: 100px;
+    font-size: 28px;
+    font-weight: bold;
+    color: #333;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.1s ease;
+    box-shadow: 
+        0 8px 16px rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.5);
+    user-select: none;
+    position: relative;
+    overflow: hidden;
+}
+
+.drum-pad:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(145deg, transparent, rgba(255, 255, 255, 0.1));
+    border-radius: 15px;
+}
+
+.drum-pad:hover {
+    transform: translateY(-2px);
+    box-shadow: 
+        0 12px 24px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+.drum-pad:active,
+.drum-pad.active {
+    transform: translateY(2px);
+    box-shadow: 
+        0 4px 8px rgba(0, 0, 0, 0.3),
+        inset 0 2px 4px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(145deg, #d0d0d0, #b0b0b0);
+}
+
+/* Individual drum pad colors */
+.drum-pad#heater-1 { background: linear-gradient(145deg, #ff6b6b, #ee5a52); }
+.drum-pad#heater-2 { background: linear-gradient(145deg, #4ecdc4, #45b7b8); }
+.drum-pad#heater-3 { background: linear-gradient(145deg, #45b7d1, #3d9ae6); }
+.drum-pad#heater-4 { background: linear-gradient(145deg, #96ceb4, #85b49a); }
+.drum-pad#clap { background: linear-gradient(145deg, #feca57, #ff9ff3); }
+.drum-pad#open-hh { background: linear-gradient(145deg, #ff9ff3, #f368e0); }
+.drum-pad#kick-n-hat { background: linear-gradient(145deg, #a29bfe, #6c5ce7); }
+.drum-pad#kick { background: linear-gradient(145deg, #fd79a8, #e84393); }
+.drum-pad#closed-hh { background: linear-gradient(145deg, #fdcb6e, #e17055); }
+
+/* Responsive design */
+@media (max-width: 480px) {
+    #drum-machine {
+        padding: 20px;
+    }
+    
+    .drum-pads-container {
+        gap: 10px;
+    }
+    
+    .drum-pad {
+        width: 80px;
+        height: 80px;
+        font-size: 24px;
+    }
+    
+    #display {
+        font-size: 18px;
+        padding: 15px;
+        min-height: 50px;
+    }
+}
+
+/* Animation for active state */
+@keyframes drumHit {
+    0% { transform: scale(1); }
+    50% { transform: scale(0.95); }
+    100% { transform: scale(1); }
+}
+
+.drum-pad.hit {
+    animation: drumHit 0.1s ease;
+}
